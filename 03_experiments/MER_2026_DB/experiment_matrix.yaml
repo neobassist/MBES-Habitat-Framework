@@ -1,0 +1,131 @@
+experiment_matrix:
+  project_id: MER_2026_DB
+  description: >
+    Experimental matrix for evaluating feature-set performance,
+    model performance, and cross-site transferability of marine
+    vegetated habitat prediction models.
+
+sites:
+  - HJ_202204
+  - BP_202507
+
+feature_sets:
+  - single_200
+  - single_300
+  - single_400
+  - dual_200_300
+  - dual_200_400
+  - dual_300_400
+  - full_multi
+
+models:
+  - random_forest
+  - xgboost
+  - lightgbm
+  - catboost
+
+seeds:
+  - 42
+  - 100
+  - 777
+  - 999
+  - 2025
+
+validation:
+  within_site:
+    enable: true
+    description: >
+      Train and test models within the same site using stratified
+      random splitting.
+    split_method: random_stratified
+    train_fraction: 0.80
+    test_fraction: 0.20
+    stratify_by_label: true
+
+  cross_site:
+    enable: true
+    description: >
+      Train models at one site and test them at the other site
+      to evaluate spatial transferability.
+    pairs:
+      - train: HJ_202204
+        test: BP_202507
+      - train: BP_202507
+        test: HJ_202204
+
+  spatial_block_cv:
+    enable: true
+    description: >
+      Spatial block cross-validation over the configured feature/model matrix.
+    split_method: stratified_group_kfold
+    n_splits: 5
+    block_size_m: 30
+    origin: global_projected_grid
+    shuffle_blocks: true
+    min_positive_per_fold: 1
+    min_negative_per_fold: 1
+    # Legacy schema key retained for Stage 09, Stage 10, and config_io
+    # compatibility. It contains the complete spatial run matrix and is not the
+    # same concept as the Stage-1 analysis tables produced by Stage 11.
+    stage1:
+      models:
+        - random_forest
+        - lightgbm
+        - catboost
+        - xgboost
+      feature_sets:
+        - single_200
+        - single_300
+        - single_400
+        - dual_200_300
+        - dual_200_400
+        - dual_300_400
+        - full_multi
+
+run_plan:
+  run_all_feature_sets: true
+  run_all_models: true
+  run_all_seeds: true
+
+  within_site_expected_runs: 280  # 2 sites x 7 feature sets x 4 models x 5 seeds
+  cross_site_expected_runs: 280  # 2 directions x 7 feature sets x 4 models x 5 seeds
+  spatial_block_cv_expected_fold_runs: 1400  # 2 sites x 7 feature sets x 4 models x 5 seeds x 5 folds
+
+  # Explicit totals. The non-spatial total counts seed-level within/cross runs;
+  # the validation total additionally counts every spatial test fold.
+  non_spatial_expected_runs_total: 560
+  validation_expected_runs_total: 1960
+
+  # Deprecated compatibility key read by config_io.expand_run_matrix(), which
+  # currently expands within-site and cross-site runs only.
+  total_expected_runs: 560
+
+outputs:
+  save_all_seed_results: true
+  summarize_mean_sd: true
+
+  save_within_site_results: true
+  save_cross_site_results: true
+
+  save_feature_set_summary: true
+  save_model_summary: true
+
+  save_feature_importance: true
+  save_confusion_matrix: true
+  save_roc_curve: true
+  save_pr_curve: true
+
+  make_final_maps: true
+  make_tables: true
+  make_figures: true
+
+notes:
+  - >
+    Within-site results are used for feature-set comparison and model
+    comparison.
+  - >
+    Cross-site results are used to evaluate model transferability
+    between contrasting marine vegetated habitats.
+  - >
+    All models are evaluated using the same feature-set definitions
+    and random seeds.

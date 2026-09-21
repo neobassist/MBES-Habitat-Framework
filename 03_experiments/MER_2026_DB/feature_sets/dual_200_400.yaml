@@ -1,0 +1,27 @@
+feature_set:
+  id: dual_200_400
+  type: dual_frequency
+
+  frequencies:
+    - 200
+    - 400
+
+  reference_frequency: 400
+  feature_count: 8
+
+features:
+  acoustic:
+    - a200_norm
+    - a400_norm
+
+  frequency_difference:
+    - NDI_4_2_norm
+
+  terrain:
+    - dpth_lite_400
+    - dpth_rel_400
+
+  texture:
+    - a400_low
+    - a400_high
+    - a400_log1p

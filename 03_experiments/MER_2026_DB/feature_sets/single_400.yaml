@@ -1,0 +1,22 @@
+feature_set:
+  id: single_400
+  type: single_frequency
+  frequencies:
+    - 400
+  reference_frequency: 400
+  feature_count: 6
+
+features:
+  acoustic:
+    - a400_norm
+
+  frequency_difference: []
+
+  terrain:
+    - dpth_lite_400
+    - dpth_rel_400
+
+  texture:
+    - a400_low
+    - a400_high
+    - a400_log1p

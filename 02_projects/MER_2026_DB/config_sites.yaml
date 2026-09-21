@@ -1,0 +1,173 @@
+sites:
+  HJ_202204:
+    site_name: Hujeong
+    short_name: HJ
+    survey_date: 2022-04-25
+
+    habitat:
+      broad_term: marine vegetated habitat
+      dominant_type: Sargassum-dominated macroalgal habitat
+      vegetation_group: macroalgae
+      notes: >
+        Vegetation at this site is mainly associated with shallow rocky areas.
+
+    environment:
+      coast: east coast of Korea
+      substrate_setting: rocky reefs and mixed sedimentary substrates
+      morphology: heterogeneous rocky seabed
+      representative_depth_frequency: 300
+      depth_range_m:
+        min: -24.61969948
+        max: -4.194489956
+      depth_range_by_frequency_m:
+        200:
+          min: -24.43758774
+          max: -4.132598877
+        300:
+          min: -24.61969948
+          max: -4.194489956
+        400:
+          min: -24.5576992
+          max: -3.817331076
+
+    frequencies:
+      - 200
+      - 300
+      - 400
+
+    paths:
+      site_root: 01_data/HJ_202204
+      bathy_dir: 01_data/HJ_202204/bathy
+      sonar_dir: 01_data/HJ_202204/backscatter_db
+      label_dir: 01_data/HJ_202204/label
+      crop_dir: 01_data/HJ_202204/crop
+
+      label_path: 01_data/HJ_202204/label/vegetation_labels.shp
+      crop_shp: 01_data/HJ_202204/crop/common_area.shp
+
+    input_files:
+      bathymetry:
+        200: depth_200.tif
+        300: depth_300.tif
+        400: depth_400.tif
+
+      backscatter:
+        200: backscatter_db_200.tif
+        300: backscatter_db_300.tif
+        400: backscatter_db_400.tif
+
+      vector:
+        labels: vegetation_labels.shp
+        crop_polygon: common_area.shp
+
+    backscatter_lineage:
+      representation: db
+      physical_quantity: FMGT dB backscatter strength
+      source_directory: backscatter_db
+      filename_inference: false
+      frequency_mapping:
+        200: backscatter_db_200.tif
+        300: backscatter_db_300.tif
+        400: backscatter_db_400.tif
+      dn_filename_pattern_excluded: backscatter_<FREQUENCY>.tif
+
+    label:
+      format: shapefile
+      positive_field: Label_Acti
+      positive_value: 1
+      negative_value: 0
+      buffer_m: 1.5
+      all_touched: true
+      clip_to_valid_feature_area: true
+      clip_mode: finite_mask
+
+    notes:
+      source_project_scope: external_legacy_project
+      legacy_result_version: 16_refine_lite_ens_xyz_crop_diag
+
+
+  BP_202507:
+    site_name: Bongpyeong
+    short_name: BP
+    survey_date: 2025-07-12
+
+    habitat:
+      broad_term: marine vegetated habitat
+      dominant_type: seagrass and surfgrass habitat
+      vegetation_group: seagrass_surfgrass
+      notes: >
+        Vegetation at this site is mainly composed of seagrass and surfgrass.
+
+    environment:
+      coast: east coast of Korea
+      substrate_setting: sandy and relatively flat seabed
+      morphology: low-relief sediment-dominated seabed
+      representative_depth_frequency: 300
+      depth_range_m:
+        min: -12.23250294
+        max: -4.251736164
+      depth_range_by_frequency_m:
+        200:
+          min: -14.98609924
+          max: -4.489375114
+        300:
+          min: -12.23250294
+          max: -4.251736164
+        400:
+          min: -12.64675045
+          max: -3.764189959
+
+    frequencies:
+      - 200
+      - 300
+      - 400
+
+    paths:
+      site_root: 01_data/BP_202507
+      bathy_dir: 01_data/BP_202507/bathy
+      sonar_dir: 01_data/BP_202507/backscatter_db
+      label_dir: 01_data/BP_202507/label
+      crop_dir: 01_data/BP_202507/crop
+
+      label_path: 01_data/BP_202507/label/vegetation_labels.shp
+      crop_shp: 01_data/BP_202507/crop/common_area.shp
+
+    input_files:
+      bathymetry:
+        200: depth_200.tif
+        300: depth_300.tif
+        400: depth_400.tif
+
+      backscatter:
+        200: backscatter_db_200.tif
+        300: backscatter_db_300.tif
+        400: backscatter_db_400.tif
+
+      vector:
+        labels: vegetation_labels.shp
+        crop_polygon: common_area.shp
+
+    backscatter_lineage:
+      representation: db
+      physical_quantity: FMGT dB backscatter strength
+      source_directory: backscatter_db
+      filename_inference: false
+      frequency_mapping:
+        200: backscatter_db_200.tif
+        300: backscatter_db_300.tif
+        400: backscatter_db_400.tif
+      dn_filename_pattern_excluded: backscatter_<FREQUENCY>.tif
+
+    label:
+      format: shapefile
+      positive_field: Label_Acti
+      positive_value: 1
+      negative_value: 0
+      buffer_m: 1.5
+      all_touched: true
+      clip_to_valid_feature_area: true
+      clip_mode: finite_mask
+
+    notes:
+      source_project_scope: external_legacy_project
+      legacy_result_version: 01_refine_lite_ens_xyz_crop_diag

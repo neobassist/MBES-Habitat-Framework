@@ -1,0 +1,21 @@
+model:
+  id: lightgbm
+  display_name: LightGBM
+  type: lightgbm_classifier
+  task: binary_classification
+
+params:
+  n_estimators: 700
+  learning_rate: 0.05
+  num_leaves: 31
+  max_depth: -1
+  min_child_samples: 20
+  subsample: 0.8
+  colsample_bytree: 0.8
+  reg_lambda: 1.0
+  class_weight: balanced
+  n_jobs: -1
+  verbose: -1
+
+ensemble:
+  use_seeds: true

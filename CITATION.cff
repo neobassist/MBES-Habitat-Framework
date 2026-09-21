@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this software snapshot, please cite the associated manuscript."
+title: "MBES Habitat Framework — MER 2026 reproducibility snapshot"
+type: software
+authors:
+  - family-names: Choi
+    given-names: SoonYoung
+abstract: >-
+  Publication-specific code snapshot for analyses reported in the MER 2026
+  manuscript on machine-learning prediction of marine vegetated habitats from
+  multibeam echosounder-derived environmental features.
+# version: [TO BE ASSIGNED]
+# date-released: [TO BE ASSIGNED]
+# repository-code: [TO BE ASSIGNED]
+preferred-citation:
+  type: article
+  title: "Machine-learning prediction of marine vegetated habitats using multibeam echosounder-derived environmental features"
+  authors:
+    - family-names: Choi
+      given-names: SoonYoung
+    - family-names: Park
+      given-names: SungJae
+    - family-names: Kim
+      given-names: BongChan
+    - family-names: Lee
+      given-names: ByungGil
+    - family-names: Do
+      given-names: JongDae
+    - family-names: Kim
+      given-names: ChangHwan
+    - family-names: Lee
+      given-names: ChangWook
+  journal: Marine Environmental Research
+# doi: [TO BE ASSIGNED]

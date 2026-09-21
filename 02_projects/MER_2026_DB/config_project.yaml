@@ -1,0 +1,223 @@
+project:
+  id: MER_2026_DB
+  type: paper
+  status: active
+
+  title: >
+    Machine-learning prediction of marine vegetated habitats
+    using MBES-derived environmental features
+
+  short_title: MER_2026_DB
+  journal_target: Marine Environmental Research
+  lead_author: SoonYoung Choi
+
+  description: >
+    Evaluation of MBES-derived acoustic, frequency-difference,
+    terrain, and texture features for marine vegetated habitat
+    prediction using machine-learning models at Hujeong and Bongpyeong.
+
+paths:
+  framework_root: .
+  data_root: 01_data
+  project_root: 02_projects/MER_2026_DB
+  experiment_root: 03_experiments/MER_2026_DB
+  pipeline_root: 04_pipeline
+  output_root: 05_outputs/MER_2026_DB
+  docs_root: 06_docs/projects/MER_2026_DB
+
+spatial:
+  crs_out: EPSG:32652
+  target_resolution_m: 0.07
+  nodata_float: null
+  nodata_integer: 255
+
+data_policy:
+  primary_data_type: MBES
+  backscatter_representation: db
+  supported_data_types:
+    - MBES
+    - satellite
+    - drone
+    - field_observation
+    - external_gis
+
+input_lineage:
+  project_id: MER_2026_DB
+  parent_project_id: MER_2026
+  backscatter:
+    representation: db
+    physical_quantity: FMGT dB backscatter strength
+    source_directory_name: backscatter_db
+    filename_policy: explicit
+    filename_mapping_source: config_sites.yaml:sites.*.input_files.backscatter
+    frequencies_khz:
+      - 200
+      - 300
+      - 400
+    filenames_intentionally_distinct_from_dn: true
+    expected_raster_metadata:
+      crs: EPSG:32652
+      dtype: float32
+      band_count: 1
+      nodata: NaN
+
+analysis_domain_policy:
+  mode: native_valid_db_common
+  source_project_id: MER_2026
+  source_output_root: 05_outputs/MER_2026
+  source_prepared_root: 05_outputs/MER_2026/prepared
+  preserve:
+    site_grid: true
+    spatial_resolution: true
+    analysis_extent: true
+    sample_domain: false
+    sample_coordinates: false
+    class_labels: false
+    split_and_fold_assignments: false
+  common_valid_mask:
+    source: native_db_all_frequency_intersection
+    required_inputs:
+      - bathymetric_environmental
+      - backscatter_db_200
+      - backscatter_db_300
+      - backscatter_db_400
+    output_pattern: 05_outputs/MER_2026_DB/prepared/<SITE_ID>/common_valid_mask.tif
+    allow_domain_shrink: true
+    allow_gap_fill: false
+    allow_sample_removal: true
+    allow_fold_change: true
+    unavailable_required_location: fail
+
+analysis:
+  task_type: binary_classification
+  positive_class_name: marine_vegetation
+  negative_class_name: non_vegetated
+
+  # Default/fallback threshold and the fixed threshold used for binary map/report
+  # products. Stages 06, 08, and 10 select evaluation thresholds separately.
+  probability_threshold_default: 0.50
+  # Per-run evaluation policy: choose a threshold that targets this precision.
+  threshold_selection_method: precision_target
+  precision_target: 0.90
+
+  save_curve_csv: true
+  max_curve_points: 2000
+  curve_downsample_method: even
+
+base_features:
+  # Explicit scientific design: Stage 02 creates only these normalized
+  # frequency-difference pairs, in this order, using the preserved feature IDs.
+  ndi_pairs:
+    - feature_name: NDI_3_2_norm
+      high_frequency: 300
+      low_frequency: 200
+    - feature_name: NDI_4_2_norm
+      high_frequency: 400
+      low_frequency: 200
+    - feature_name: NDI_4_3_norm
+      high_frequency: 400
+      low_frequency: 300
+
+  acoustic_normalization:
+    method: depth_bin_robust
+    depth_bins_q: 6
+    min_per_bin: 100
+    eps: 1.0e-6
+
+  depth_lite:
+    method: robust_median_p5_p95
+    clip: 5.0
+    eps: 1.0e-6
+
+  relative_depth:
+    method: local_median_iqr
+    coarse_res_m: 1.0
+    radius_m: 15.0
+    iqr_eps: 0.05
+    clip: 5.0
+
+  texture:
+    method: gaussian_low_high_log
+    gauss_sigma_px: 6.0
+    log_sigma_px: 1.5
+    use_log1p: true
+    clip: 5.0
+
+sampling:
+  mode: site_level_common
+  random_seed: 42
+  n_neg_per_pos: 3
+  positive_sampling: all_positive_pixels
+  negative_sampling: random_background_pixels
+  drop_nan_inf: true
+  common_sample:
+    policy_id: native_db_all_frequency_common_valid_v1
+    common_mask_pattern: 05_outputs/MER_2026_DB/prepared/{site_id}/common_valid_mask.tif
+    authority_directory: samples_common
+    reuse_across_feature_sets: true
+    non_finite_feature_policy: fail
+
+validation:
+  within_site: true
+  cross_site: true
+  spatial_block_cv: true
+
+evaluation_metrics:
+  primary_metric: AP
+
+  report_metrics:
+    - AP
+    - AUC
+    - Precision
+    - Recall
+    - F1
+    - Accuracy
+    - Balanced_Accuracy
+    - Specificity
+
+ensemble:
+  enabled: true
+  seeds:
+    - 42
+    - 100
+    - 777
+    - 999
+    - 2025
+  summarize_method: mean_sd
+
+outputs:
+  save_prepared_data: true
+  save_feature_stacks: true
+  save_samples: true
+  save_models: true
+  save_validation_models: false
+  save_final_models: true
+  save_probability_maps: true
+  save_binary_maps: true
+  save_feature_importance: true
+  save_confusion_matrix: true
+  save_diagnostics: true
+  save_tables: true
+  save_figures: true
+  save_docs: true
+
+documentation:
+  auto_generate_readme: true
+  auto_generate_pipeline_manual: true
+  auto_generate_feature_definitions: true
+  auto_generate_experiment_catalog: true
+  auto_generate_changelog: true
+
+git:
+  track_git_hash: true
+  track_git_branch: true
+  track_git_tag: true
+
+provenance:
+  configuration_version: 1
+  input_lineage_version: 1
+  parent_project_id: MER_2026
+  parent_baseline_commit: a0fbd8b4a4f696bb1c23c9bb06468fac4920c685
+  parent_candidate_sha256: b43bd161ac5f3338e5778e2c3dd0d26658b8e021a09d637a79a14e3e72b5492c
+  acoustic_representation: FMGT dB backscatter strength
+  created_at: "2026-08-24T18:00:55+09:00"

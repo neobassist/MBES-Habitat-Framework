@@ -1,0 +1,1635 @@
+schema_version: 1
+project_id: MER_2026_DB
+publication:
+  table_documentation_mode: generic
+  authority:
+    scientific_project_id: MER_2026_DB
+    acoustic_representation: FMGT-processed backscatter strength (dB)
+    analysis_config:
+      path: 03_experiments/MER_2026_DB/analysis.yaml
+      sha256: 0c3df1153b924746962ea8e52923dd69b25f4377d89a76a14b84899e15798bbf
+    candidate_comparison:
+      path: 05_outputs/MER_2026_DB/analysis_compare/stage2_final_candidate_comparison.csv
+      sha256: 1fe95479af5735e63b005bbc8b49f2440ceeba8ff695cc128acb69ffb65a77ae
+    full_ranking:
+      path: 05_outputs/MER_2026_DB/analysis_compare/stage2_integrated_feature_model_stats.csv
+      sha256: 09f7528bb645d8c952a50f9fae9e88aae54104b924a6c2a55186561e0bc9f5a5
+    final_mapping_freeze:
+      path: 05_outputs/MER_2026_DB/final_mapping_freeze/final_mapping_freeze.json
+    primary_candidate_role: primary_balanced
+    selected_candidate_roles:
+    - primary_balanced
+    - cross_site_best
+    - spatial_best
+    - dual_transfer_candidate
+    final_seed: 42
+    display_precision: 4
+    map_threshold:
+      value: 0.5
+      source: 02_projects/MER_2026_DB/config_project.yaml:analysis.probability_threshold_default
+    figure_1_backscatter:
+      frequency_khz: 300
+      source_domain: prepared_common_valid
+      file_name: backscatter_300_aligned.tif
+      valid_mask_file_name: common_valid_mask.tif
+      label: Backscatter strength (dB)
+  display:
+    sites:
+    - id: BP_202507
+      label: Bongpyeong
+      order: 1
+      hatch: ''
+      alpha: 0.95
+    - id: HJ_202204
+      label: Hujeong
+      order: 2
+      hatch: //
+      alpha: 0.72
+    candidates:
+    - id: primary_balanced
+      label: Balanced candidate
+      compact_label: |-
+        Balanced
+        candidate
+      order: 1
+      color: '#4f83b8'
+      final_map_role: primary habitat map
+      selection_basis: highest equal-weight integrated AP
+    - id: cross_site_best
+      label: Cross-site optimized candidate
+      compact_label: |-
+        Cross-site optimized
+        candidate
+      order: 2
+      color: '#c96b4a'
+      final_map_role: cross-site sensitivity candidate
+      selection_basis: highest cross-site AP across all configured feature-model combinations
+    - id: spatial_best
+      label: Spatial block CV optimized candidate
+      compact_label: |-
+        Spatial block CV optimized
+        candidate
+      order: 3
+      color: '#5a9f68'
+      final_map_role: spatial robustness candidate
+      selection_basis: highest spatial block CV AP across all configured feature-model combinations
+    - id: dual_transfer_candidate
+      label: Dual-frequency transfer candidate
+      compact_label: |-
+        Dual-frequency transfer
+        candidate
+      order: 4
+      color: '#8b6bbd'
+      final_map_role: dual-frequency transfer candidate
+      selection_basis: highest cross-site AP among configured dual-frequency combinations
+    feature_sets:
+    - id: single_200
+      label: Single 200 kHz
+      order: 1
+    - id: single_300
+      label: Single 300 kHz
+      order: 2
+    - id: single_400
+      label: Single 400 kHz
+      order: 3
+    - id: dual_200_300
+      label: Dual 200+300 kHz
+      order: 4
+    - id: dual_200_400
+      label: Dual 200+400 kHz
+      order: 5
+    - id: dual_300_400
+      label: Dual 300+400 kHz
+      order: 6
+    - id: full_multi
+      label: Full 10-band
+      order: 7
+    models:
+    - id: random_forest
+      label: Random Forest
+      compact_label: RF
+      order: 1
+    - id: lightgbm
+      label: LightGBM
+      order: 2
+    - id: catboost
+      label: CatBoost
+      order: 3
+    - id: xgboost
+      label: XGBoost
+      order: 4
+    validations:
+    - id: within_site
+      label: Within-site
+      order: 1
+      color: '#4f83b8'
+    - id: cross_site
+      label: Cross-site
+      order: 2
+      color: '#c96b4a'
+    - id: spatial_block_cv
+      label: Spatial block CV
+      order: 3
+      color: '#5a9f68'
+    feature_groups:
+    - id: Bathymetric features
+      label: Bathymetric features
+      order: 1
+      color: '#4f83b8'
+    - id: Acoustic intensity
+      label: Acoustic intensity
+      order: 2
+      color: '#5a9f68'
+    - id: Texture features
+      label: Texture features
+      order: 3
+      color: '#d9903d'
+    - id: Frequency-difference indices
+      label: Frequency-difference indices
+      order: 4
+      color: '#8b6bbd'
+    - id: Other
+      label: Other
+      order: 5
+      color: '#6b7280'
+    labels:
+      a200_norm: 200 kHz backscatter
+      a300_norm: 300 kHz backscatter
+      a400_norm: 400 kHz backscatter
+      NDI_4_2_norm: NDI 400-200
+      NDI_4_3_norm: NDI 400-300
+      NDI_3_2_norm: NDI 300-200
+      dpth_lite_200: Robust depth 200 kHz
+      dpth_lite_400: Robust depth 400 kHz
+      dpth_lite_300: Robust depth 300 kHz
+      dpth_rel_200: Relative depth 200 kHz
+      dpth_rel_400: Relative depth 400 kHz
+      dpth_rel_300: Relative depth 300 kHz
+      a300_low: 300 kHz low-pass
+      a300_high: 300 kHz high-pass
+      a300_log1p: 300 kHz LoG texture
+      a200_low: 200 kHz low-pass
+      a200_high: 200 kHz high-pass
+      a200_log1p: 200 kHz LoG texture
+      a400_low: 400 kHz low-pass
+      a400_high: 400 kHz high-pass
+      a400_log1p: 400 kHz LoG texture
+      within_AP: Within-site
+      cross_AP: Cross-site
+      spatial_AP: Spatial block CV
+      mean_AP: Integrated AP
+      AP_mean: AP
+  primary_candidate_id: primary_balanced
+  representative_runs:
+  - id: hujeong_validation
+    figure_id: fig_s08_validation_performance_hujeong
+    table_id: table_s09_representative_validation_hujeong
+    target_site: HJ_202204
+    train_site: BP_202507
+    feature_set: full_multi
+    model: random_forest
+    seed: 42
+    spatial_folds:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    spatial_aggregation_method: Pooled out-of-fold predictions across five spatial folds
+  - id: bongpyeong_validation
+    figure_id: fig_s09_validation_performance_bongpyeong
+    table_id: table_s10_representative_validation_bongpyeong
+    target_site: BP_202507
+    train_site: HJ_202204
+    feature_set: full_multi
+    model: random_forest
+    seed: 42
+    spatial_folds:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    spatial_aggregation_method: Pooled out-of-fold predictions across five spatial folds
+  figures:
+  - id: fig_01_study_areas
+    number: Figure 1
+    role: main
+    order: 1
+    title: Study areas
+    stem: fig_01_study_areas
+    builder: study_areas
+    panels:
+    - id: fig01_panel_a_bongpyeong_bathymetry
+      letter: a
+      title: Bongpyeong bathymetry
+      stem: fig01_panel_a_bongpyeong_bathymetry
+      selection:
+        site: BP_202507
+        layer: bathy
+        source_domain: prepared_common_valid
+        file_name: depth_300_aligned.tif
+        valid_mask_file_name: common_valid_mask.tif
+        map_type: bathymetry
+        cmap: viridis
+        colorbar_label: Depth (m)
+    - id: fig01_panel_b_bongpyeong_300khz_backscatter_db
+      letter: b
+      title: Bongpyeong 300 kHz backscatter
+      stem: fig01_panel_b_bongpyeong_300khz_backscatter_db
+      selection:
+        site: BP_202507
+        layer: sonar
+        source_domain: prepared_common_valid
+        file_name: backscatter_300_aligned.tif
+        valid_mask_file_name: common_valid_mask.tif
+        map_type: 300 kHz backscatter
+        cmap: gray
+        colorbar_label: Backscatter strength (dB)
+    - id: fig01_panel_c_hujeong_bathymetry
+      letter: c
+      title: Hujeong bathymetry
+      stem: fig01_panel_c_hujeong_bathymetry
+      selection:
+        site: HJ_202204
+        layer: bathy
+        source_domain: prepared_common_valid
+        file_name: depth_300_aligned.tif
+        valid_mask_file_name: common_valid_mask.tif
+        map_type: bathymetry
+        cmap: viridis
+        colorbar_label: Depth (m)
+    - id: fig01_panel_d_hujeong_300khz_backscatter_db
+      letter: d
+      title: Hujeong 300 kHz backscatter
+      stem: fig01_panel_d_hujeong_300khz_backscatter_db
+      selection:
+        site: HJ_202204
+        layer: sonar
+        source_domain: prepared_common_valid
+        file_name: backscatter_300_aligned.tif
+        valid_mask_file_name: common_valid_mask.tif
+        map_type: 300 kHz backscatter
+        cmap: gray
+        colorbar_label: Backscatter strength (dB)
+    paired_table_ids:
+    - table_01_study_sites_dataset_summary
+    paired_source_data_ids:
+    - final_map_inventory
+    manuscript_role: Study-area spatial context
+    source_lineage: MER_2026_DB prepared common-valid rasters; 300-kHz FMGT-processed dB backscatter; final_map_inventory
+    caption: Figure 1. Study areas and multibeam echosounder survey context for Bongpyeong and Hujeong, Republic
+      of Korea. Panels (a) and (c) show bathymetry within the common valid MBES raster coverage used for downstream
+      habitat mapping at Bongpyeong and Hujeong, respectively; panels (b) and (d) show the corresponding 300 kHz
+      FMGT-processed backscatter strength (dB) over the same coverage. Gray denotes cells outside the common valid raster domain. Map coordinates
+      use UTM Zone 52N (EPSG:32652), north arrows indicate grid/map north, and scale bars report horizontal distance. Color scales describe the mapped
+      bathymetric or acoustic variable, not sampling density or model performance. Table 1 provides complementary
+      site and survey metadata.
+  - id: fig_02_workflow_validation_framework
+    number: Figure 2
+    role: main
+    order: 2
+    title: Workflow and validation framework
+    stem: fig_02_workflow_validation_framework
+    builder: workflow_validation
+    panels:
+    - id: fig02_panel_a_mbes_data_acquisition
+      letter: a
+      title: MBES data acquisition
+      stem: fig02_panel_a_mbes_data_acquisition
+    - id: fig02_panel_b_preprocessing
+      letter: b
+      title: Preprocessing
+      stem: fig02_panel_b_preprocessing
+    - id: fig02_panel_c_feature_generation
+      letter: c
+      title: Feature generation
+      stem: fig02_panel_c_feature_generation
+    - id: fig02_panel_d_labeled_samples
+      letter: d
+      title: Labeled samples
+      stem: fig02_panel_d_labeled_samples
+    - id: fig02_panel_e_model_feature_matrix
+      letter: e
+      title: Model × feature matrix
+      stem: fig02_panel_e_model_feature_matrix
+    - id: fig02_panel_f_validation_framework
+      letter: f
+      title: Validation framework
+      stem: fig02_panel_f_validation_framework
+    - id: fig02_panel_g_integrated_candidate_selection
+      letter: g
+      title: Integrated candidate selection
+      stem: fig02_panel_g_integrated_candidate_selection
+    - id: fig02_panel_h_final_retraining_habitat_mapping
+      letter: h
+      title: Final retraining and habitat mapping
+      stem: fig02_panel_h_final_retraining_habitat_mapping
+    paired_table_ids:
+    - table_01_study_sites_dataset_summary
+    - table_s02_model_configuration
+    paired_source_data_ids:
+    - final_model_provenance
+    manuscript_role: Methods workflow and validation design
+    source_lineage: project configuration; experiment matrix; final_model_provenance
+    caption: Figure 2. Multibeam echosounder (MBES) habitat-prediction workflow and validation framework. Panels
+      (a-h) trace MBES acquisition, preprocessing, environmental-feature generation, labeled sampling, the model
+      by feature-set experiment matrix, within-site validation, directional cross-site transfer, spatial block cross-validation
+      (CV), integrated candidate selection, and final retraining and habitat mapping. Within-site validation uses
+      held-out samples from the same site, cross-site validation trains on one site and evaluates the other, and
+      spatial block CV separates geographically defined folds. Table 1 summarizes site context and Table S2 gives
+      the model configurations; the diagram describes process rather than performance magnitude.
+  - id: fig_03_mbes_feature_definitions
+    number: Figure 3
+    role: main
+    order: 3
+    title: MBES-derived environmental features
+    stem: fig_03_mbes_feature_definitions
+    builder: mbes_feature_definitions
+    panels:
+    - id: fig03_panel_a_acoustic_intensity
+      letter: a
+      title: Acoustic intensity
+      stem: fig03_panel_a_acoustic_intensity
+    - id: fig03_panel_b_frequency_difference_indices
+      letter: b
+      title: Frequency-difference indices
+      stem: fig03_panel_b_frequency_difference_indices
+    - id: fig03_panel_c_bathymetric_features
+      letter: c
+      title: Bathymetric features
+      stem: fig03_panel_c_bathymetric_features
+    - id: fig03_panel_d_texture_features
+      letter: d
+      title: Texture features
+      stem: fig03_panel_d_texture_features
+    paired_table_ids:
+    - table_s01_feature_set_composition
+    paired_source_data_ids: []
+    manuscript_role: Methods feature concepts
+    source_lineage: feature-set configuration; Stage 02 and Stage 03 feature definitions
+    caption: Figure 3. Concepts represented by the MBES-derived environmental features. Panel (a) shows 200, 300,
+      and 400 kHz acoustic layers normalized within six depth-quantile bins by median centering and a P90-P10
+      denominator (minimum 100 valid cells per bin; epsilon 1e-6; no 0-1 clipping). Panel (b) shows configured
+      frequency-difference indices calculated as (high-low)/(abs(high)+abs(low)), with a zero denominator treated
+      as invalid. Panel (c) shows robust depth and local relative depth based on a local median and IQR. Panel (d)
+      shows Gaussian low-pass (sigma 6), high-pass, and log1p absolute Laplacian texture after Gaussian smoothing
+      (sigma 1.5), with robust P5/P95 scaling and configured clipping to +/-5. GLCM is not used. Table S1 lists
+      the exact composition of the seven Single, Dual, and Full 10-band sets.
+  - id: fig_04_feature_set_comparison
+    number: Figure 4
+    role: main
+    order: 4
+    title: Feature-set comparison
+    stem: fig_04_feature_set_comparison
+    builder: feature_set_comparison
+    panels:
+    - id: fig04_panel_a_feature_set_validation_specific_ap
+      letter: a
+      title: Feature-set validation-specific AP
+      stem: fig04_panel_a_feature_set_validation_specific_ap
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    - id: fig04_panel_b_feature_set_within_site_ap
+      letter: b
+      title: Feature-set within-site AP ranking
+      stem: fig04_panel_b_feature_set_within_site_ap
+      selection:
+        feature_set: full_multi; single_200; dual_200_400; single_400; dual_200_300; dual_300_400; single_300
+    - id: fig04_panel_c_feature_set_cross_site_ap
+      letter: c
+      title: Feature-set cross-site AP ranking
+      stem: fig04_panel_c_feature_set_cross_site_ap
+      selection:
+        feature_set: single_300; dual_200_300; full_multi; single_200; dual_200_400; single_400; dual_300_400
+    - id: fig04_panel_d_feature_set_spatial_cv_ap
+      letter: d
+      title: Feature-set spatial block CV AP ranking
+      stem: fig04_panel_d_feature_set_spatial_cv_ap
+      selection:
+        feature_set: single_200; dual_200_400; full_multi; dual_300_400; dual_200_300; single_400; single_300
+    - id: fig04_panel_e_feature_set_mean_ap_ranking
+      letter: e
+      title: Feature-set Integrated AP ranking
+      stem: fig04_panel_e_feature_set_mean_ap_ranking
+      selection:
+        feature_set: single_200; full_multi; dual_200_300; single_300; dual_200_400; dual_300_400; single_400
+    paired_table_ids:
+    - table_02_key_validation_performance
+    paired_source_data_ids:
+    - integrated_model_feature_marginals
+    manuscript_role: Results feature-set comparison
+    source_lineage: integrated_model_feature_marginals
+    caption: Figure 4. Average-precision (AP) comparison among the seven feature sets. Panel (a) contrasts within-site,
+      cross-site, and spatial block CV marginal AP; panels (b-d) rank feature sets within each validation strategy;
+      and panel (e) ranks their equal-weight Integrated AP across the three strategies. Marginal values average the stored
+      model-level summaries for the corresponding feature set, and rank 1 is best. Higher AP indicates better precision-recall
+      performance. Table 2 reports the exact top five model-feature combinations within each site or transfer scope
+      rather than these feature-set marginals.
+  - id: fig_05_model_comparison
+    number: Figure 5
+    role: main
+    order: 5
+    title: Model comparison
+    stem: fig_05_model_comparison
+    builder: model_comparison
+    panels:
+    - id: fig05_panel_a_model_validation_specific_ap
+      letter: a
+      title: Model validation-specific AP
+      stem: fig05_panel_a_model_validation_specific_ap
+      selection:
+        model: random_forest; lightgbm; catboost; xgboost
+    - id: fig05_panel_b_model_within_site_ap
+      letter: b
+      title: Model within-site AP ranking
+      stem: fig05_panel_b_model_within_site_ap
+      selection:
+        model: random_forest; lightgbm; catboost; xgboost
+    - id: fig05_panel_c_model_cross_site_ap
+      letter: c
+      title: Model cross-site AP ranking
+      stem: fig05_panel_c_model_cross_site_ap
+      selection:
+        model: random_forest; lightgbm; xgboost; catboost
+    - id: fig05_panel_d_model_spatial_cv_ap
+      letter: d
+      title: Model spatial block CV AP ranking
+      stem: fig05_panel_d_model_spatial_cv_ap
+      selection:
+        model: random_forest; xgboost; catboost; lightgbm
+    - id: fig05_panel_e_model_mean_ap_ranking
+      letter: e
+      title: Model Integrated AP ranking
+      stem: fig05_panel_e_model_mean_ap_ranking
+      selection:
+        model: random_forest; lightgbm; catboost; xgboost
+    paired_table_ids:
+    - table_02_key_validation_performance
+    paired_source_data_ids:
+    - integrated_model_feature_marginals
+    manuscript_role: Results model comparison
+    source_lineage: integrated_model_feature_marginals
+    caption: Figure 5. Average-precision (AP) comparison among Random Forest, LightGBM, CatBoost, and XGBoost. Panel
+      (a) contrasts within-site, cross-site, and spatial block cross-validation (CV) marginal AP; panels (b-d) rank
+      models within each validation strategy; and panel (e) ranks their equal-weight Integrated AP across the three strategies.
+      Marginal values average the stored feature-set summaries for each model, rank 1 is best, and higher AP is
+      better. Table 2 provides the exact leading model-feature combinations for each evaluation scope.
+  - id: fig_06_feature_model_heatmap
+    number: Figure 6
+    role: main
+    order: 6
+    title: Feature x model integrated performance
+    stem: fig_06_feature_model_heatmap
+    builder: feature_model_heatmap
+    panels:
+    - id: fig06_panel_a_feature_model_integrated_performance_heatmap
+      letter: a
+      title: Feature x model integrated performance
+      stem: fig06_panel_a_feature_model_integrated_performance_heatmap
+      selection:
+        model: random_forest; lightgbm; catboost; xgboost
+        feature_set: full_multi; dual_200_300; single_300; single_200; dual_200_400; dual_300_400; single_400
+    paired_table_ids:
+    - table_02_key_validation_performance
+    paired_source_data_ids:
+    - integrated_feature_model_matrix
+    manuscript_role: Results integrated feature-model comparison
+    source_lineage: integrated_feature_model_matrix
+    caption: Figure 6. Integrated performance of all 28 feature-set by model combinations. Rows are the seven feature
+      sets, columns are Random Forest, LightGBM, CatBoost, and XGBoost, and each cell is the equal-weight mean average
+      precision (AP) across within-site, cross-site, and spatial block cross-validation summaries. Lighter or higher-valued
+      cells indicate greater AP; the values are not sample-weighted or pooled predictions. Table 2 supplies the
+      top five combinations within each individual evaluation scope.
+  - id: fig_07_final_candidate_comparison
+    number: Figure 7
+    role: main
+    order: 7
+    title: Final candidate comparison
+    stem: fig_07_final_candidate_comparison
+    builder: final_candidate_comparison
+    panels:
+    - id: fig07_panel_a_final_candidate_validation_specific_ap
+      letter: a
+      title: Final candidate validation-specific AP
+      stem: fig07_panel_a_final_candidate_validation_specific_ap
+      selection:
+        model: random_forest; catboost
+        feature_set: full_multi; single_300; single_200; dual_200_300
+    - id: fig07_panel_b_final_candidate_mean_ap_ranking
+      letter: b
+      title: Final candidate integrated AP ranking
+      stem: fig07_panel_b_final_candidate_mean_ap_ranking
+      selection:
+        model: random_forest; catboost
+        feature_set: full_multi; dual_200_300; single_300; single_200
+    paired_table_ids:
+    - table_03_final_candidate_selection
+    paired_source_data_ids:
+    - integrated_feature_model_matrix
+    manuscript_role: Results final candidate selection
+    source_lineage: stage2_final_candidate_comparison; integrated_feature_model_matrix
+    caption: 'Figure 7. Validation performance of the four retained mapping candidates, shown in canonical
+      order: Balanced candidate, Cross-site optimized candidate, Spatial block CV optimized candidate, and Dual-frequency transfer candidate. Panel (a) compares
+      within-site, cross-site, and spatial block cross-validation average precision (AP); panel (b) ranks candidates
+      by integrated AP. Integrated AP is the equal-weight arithmetic mean of the three validation-strategy AP values
+      and is neither sample-weighted nor a pooled AP. Candidate colors and order are used consistently in subsequent
+      figures. Table 3 reports the exact values, robustness summaries, and retained analytical roles.'
+  - id: fig_08_feature_importance
+    number: Figure 8
+    role: main
+    order: 8
+    title: Feature importance
+    stem: fig_08_feature_importance
+    builder: main_feature_importance
+    panels:
+    - id: fig08_panel_a_all_feature_importance
+      letter: a
+      title: Feature importance
+      stem: fig08_panel_a_all_feature_importance
+    - id: fig08_panel_b_feature_group_contribution
+      letter: b
+      title: Mean feature-group importance
+      stem: fig08_panel_b_feature_group_contribution
+    paired_table_ids:
+    - table_s08_final_feature_importance
+    paired_source_data_ids:
+    - final_model_provenance
+    manuscript_role: Results final-model feature importance
+    source_lineage: final-map feature_importance artifacts; final_model_provenance
+    caption: >-
+      Figure 8. Model-native feature importance across the final Random Forest and CatBoost site-candidate models.
+      Before cross-model summaries, each final model's importances were converted to within-model shares summing to
+      one so that the Random Forest and CatBoost native scales received equal model weight. Panel (a) summarizes mean
+      shares for individual features. Panel (b) shows mean feature-group importance: within each of the eight final
+      site-candidate models, normalized feature-importance shares were first summed within the acoustic-intensity,
+      frequency-difference, bathymetric, and texture groups, with groups absent from a candidate feature set
+      contributing zero, and the resulting group totals were then averaged equally across models. These are normalized
+      model-native importances (impurity-based for Random Forest), not permutation importance, causal effects,
+      ecological effect sizes, or validation metrics. Table S8 provides the complete raw site- and candidate-specific values.
+  - id: fig_09_predicted_habitat_maps
+    number: Figure 9
+    role: main
+    order: 9
+    title: Predicted habitat maps
+    stem: fig_09_predicted_habitat_maps
+    builder: predicted_habitat_maps
+    selection:
+      candidate: primary_balanced
+    panels:
+    - id: fig09_panel_a_bongpyeong_probability_map
+      letter: a
+      title: Bongpyeong probability
+      stem: fig09_panel_a_bongpyeong_probability_map
+      selection:
+        site: BP_202507
+        map_kind: probability
+    - id: fig09_panel_b_bongpyeong_binary_habitat_p05
+      letter: b
+      title: Bongpyeong binary habitat
+      stem: fig09_panel_b_bongpyeong_binary_habitat_p05
+      selection:
+        site: BP_202507
+        map_kind: binary
+        render_title: Bongpyeong predicted habitat (P ≥ 0.5)
+    - id: fig09_panel_c_hujeong_probability_map
+      letter: c
+      title: Hujeong probability
+      stem: fig09_panel_c_hujeong_probability_map
+      selection:
+        site: HJ_202204
+        map_kind: probability
+    - id: fig09_panel_d_hujeong_binary_habitat_p05
+      letter: d
+      title: Hujeong binary habitat
+      stem: fig09_panel_d_hujeong_binary_habitat_p05
+      selection:
+        site: HJ_202204
+        map_kind: binary
+        render_title: Hujeong predicted habitat (P ≥ 0.5)
+    paired_table_ids:
+    - table_04_primary_habitat_prediction_summary
+    paired_source_data_ids:
+    - final_map_inventory
+    - probability_statistics
+    - binary_statistics
+    manuscript_role: Results primary habitat predictions
+    source_lineage: Stage 12 primary_balanced probability rasters and valid masks
+    caption: Figure 9. Final habitat predictions from the primary Balanced candidate (Random Forest with the Full
+      10-band feature set). Panels (a) and (c) show pixel-level habitat-class probability for Bongpyeong and Hujeong;
+      panels (b) and (d) show binary habitat predictions at the fixed threshold p >= 0.5. Valid mapped area comprises
+      finite prediction pixels accepted by the final feature mask; NoData and invalid-feature pixels are excluded.
+      North arrows indicate grid/map north in the north-up EPSG:32652 rasters, and scale bars report projected horizontal distance. The maps indicate model-predicted habitat rather than independently mapped ground truth. Table 4 reports valid
+      mapped area and predicted habitat extent for each site.
+  - id: fig_s01_within_site_validation
+    number: Figure S1
+    role: supplementary
+    order: 1
+    title: Within-site validation
+    stem: fig_s01_within_site_validation
+    builder: within_site_validation
+    panels:
+    - id: fig_s01a_model_ranking
+      letter: a
+      title: Model ranking
+      stem: fig_s01a_model_ranking
+      selection:
+        model: random_forest; lightgbm; catboost; xgboost
+    - id: fig_s01b_feature_set_ranking
+      letter: b
+      title: Feature-set ranking
+      stem: fig_s01b_feature_set_ranking
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    - id: fig_s01c_feature_by_model_heatmap
+      letter: c
+      title: Feature by model heatmap
+      stem: fig_s01c_feature_by_model_heatmap
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    paired_table_ids:
+    - table_s03_full_within_site_results
+    paired_source_data_ids:
+    - within_site_detailed_summary
+    - within_by_site_feature_model
+    manuscript_role: Supplementary within-site validation
+    source_lineage: within-site five-seed summaries
+    caption: Figure S1. Held-out within-site validation across Bongpyeong and Hujeong for seven feature sets and
+      four models. Panels (a) and (b) rank model and feature-set marginal mean average precision (AP), respectively,
+      and panel (c) shows the feature-set by model AP matrix. The underlying site-model-feature summaries average
+      five seed-specific held-out evaluations; marginal panels further average over dimensions they do not display,
+      and any uncertainty shown is the corresponding stored summary standard deviation. Rank 1 is best. Table S3
+      gives the complete site, model, and feature-set results.
+  - id: fig_s02_cross_site_validation
+    number: Figure S2
+    role: supplementary
+    order: 2
+    title: Cross-site validation
+    stem: fig_s02_cross_site_validation
+    builder: cross_site_validation
+    panels:
+    - id: fig_s02a_model_ranking
+      letter: a
+      title: Model ranking
+      stem: fig_s02a_model_ranking
+      selection:
+        model: random_forest; lightgbm; xgboost; catboost
+    - id: fig_s02b_feature_set_ranking
+      letter: b
+      title: Feature-set ranking
+      stem: fig_s02b_feature_set_ranking
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    - id: fig_s02c_feature_by_model_heatmap
+      letter: c
+      title: Feature by model heatmap
+      stem: fig_s02c_feature_by_model_heatmap
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    - id: fig_s02d_transfer_direction_feature_heatmap
+      letter: d
+      title: Transfer-direction feature heatmap
+      stem: fig_s02d_transfer_direction_feature_heatmap
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    paired_table_ids:
+    - table_s04_full_cross_site_results
+    paired_source_data_ids:
+    - cross_site_detailed_summary
+    - cross_by_direction_feature_model
+    manuscript_role: Supplementary directional transfer validation
+    source_lineage: cross-site five-seed directional summaries
+    caption: Figure S2. Directional cross-site transfer performance for Bongpyeong to Hujeong and Hujeong to Bongpyeong.
+      Panels (a) and (b) rank model and feature-set marginal mean average precision (AP), panel (c) shows the feature-set
+      by model matrix, and panel (d) separates feature-set AP by transfer direction. Models are trained at the origin
+      site and evaluated on the complete target-site dataset; the two directions are not pooled. Underlying direction-model-feature
+      summaries average five seeds; marginal panels further average over omitted dimensions, and rank 1 is best.
+      Table S4 provides the complete direction-specific results.
+  - id: fig_s03_spatial_block_cv_validation
+    number: Figure S3
+    role: supplementary
+    order: 3
+    title: Spatial block CV validation
+    stem: fig_s03_spatial_block_cv_validation
+    builder: spatial_cv_validation
+    panels:
+    - id: fig_s03a_model_ranking
+      letter: a
+      title: Model ranking
+      stem: fig_s03a_model_ranking
+      selection:
+        model: random_forest; xgboost; catboost; lightgbm
+    - id: fig_s03b_feature_set_ranking
+      letter: b
+      title: Feature-set ranking
+      stem: fig_s03b_feature_set_ranking
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    - id: fig_s03c_feature_by_model_heatmap
+      letter: c
+      title: Feature by model heatmap
+      stem: fig_s03c_feature_by_model_heatmap
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    paired_table_ids:
+    - table_s05_full_spatial_cv_results
+    paired_source_data_ids:
+    - spatial_block_cv_detailed_summary
+    - spatial_by_site_feature_model
+    manuscript_role: Supplementary spatial generalization validation
+    source_lineage: spatial block five-seed by five-fold summaries
+    caption: Figure S3. Spatial block cross-validation (CV) for both sites across seven feature sets and four models.
+      Panels (a) and (b) rank model and feature-set marginal mean average precision (AP), and panel (c) shows the
+      feature-set by model AP matrix. Underlying site-model-feature summaries average five seeds by five spatial
+      folds (25 fold-runs), and marginal panels further average over omitted dimensions. These are fold-run means,
+      not a pooled out-of-fold (OOF) estimate; rank 1 is best. Table S5 provides the complete spatial block CV summaries.
+  - id: fig_s04_integrated_comparison
+    number: Figure S4
+    role: supplementary
+    order: 4
+    title: Integrated validation comparison
+    stem: fig_s04_integrated_comparison
+    builder: integrated_comparison
+    panels:
+    - id: fig_s04a_validation_specific_model_comparison
+      letter: a
+      title: Validation-specific model comparison
+      stem: fig_s04a_validation_specific_model_comparison
+      selection:
+        model: random_forest; lightgbm; catboost; xgboost
+    - id: fig_s04b_integrated_model_ranking
+      letter: b
+      title: Integrated model ranking
+      stem: fig_s04b_integrated_model_ranking
+      selection:
+        model: random_forest; lightgbm; catboost; xgboost
+    - id: fig_s04c_validation_specific_feature_comparison
+      letter: c
+      title: Validation-specific feature comparison
+      stem: fig_s04c_validation_specific_feature_comparison
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    - id: fig_s04d_integrated_feature_ranking
+      letter: d
+      title: Integrated feature ranking
+      stem: fig_s04d_integrated_feature_ranking
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    - id: fig_s04e_integrated_feature_by_model_heatmap
+      letter: e
+      title: Integrated feature by model heatmap
+      stem: fig_s04e_integrated_feature_by_model_heatmap
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    paired_table_ids: []
+    paired_source_data_ids:
+    - integrated_model_feature_marginals
+    - integrated_feature_model_matrix
+    manuscript_role: Supplementary integrated marginal comparison
+    source_lineage: integrated_model_feature_marginals; integrated_feature_model_matrix
+    caption: Figure S4. Integrated marginal comparison of validation strategies, models, and feature sets. Panels
+      (a) and (c) show within-site, cross-site, and spatial block cross-validation average precision (AP) for model
+      and feature-set marginals; panels (b) and (d) rank their equal-weight means; and panel (e) shows the integrated
+      feature-set by model matrix. Integrated values give equal weight to the three validation strategies and are
+      not sample-weighted or pooled AP. Marginal rankings do not by themselves define the selected individual model-feature
+      candidate; canonical values are supplied in the unnumbered integrated marginal and feature-model Source Data.
+  - id: fig_s05_ranking_stability
+    number: Figure S5
+    role: supplementary
+    order: 5
+    title: Ranking stability
+    stem: fig_s05_ranking_stability
+    builder: ranking_stability
+    panels:
+    - id: fig_s05a_feature_rank_stability
+      letter: a
+      title: Feature rank stability
+      stem: fig_s05a_feature_rank_stability
+      selection:
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    - id: fig_s05b_feature_by_model_rank_stability
+      letter: b
+      title: Feature by model rank stability
+      stem: fig_s05b_feature_by_model_rank_stability
+      selection:
+        model: random_forest; lightgbm; catboost; xgboost
+        feature_set: single_200; single_300; single_400; dual_200_300; dual_200_400; dual_300_400; full_multi
+    paired_table_ids:
+    - table_s06_rank_stability_shift
+    paired_source_data_ids:
+    - rank_stability_all_entities
+    - feature_rank_stability
+    manuscript_role: Supplementary rank stability
+    source_lineage: rank_stability_all_entities
+    caption: Figure S5. Stability of average-precision ranks across within-site, cross-site, and spatial block cross-validation.
+      Panel (a) shows each feature set's best, mean, and worst rank; panel (b) shows the same range for all 28 feature-set
+      by model combinations in canonical feature and model order. Rank 1 denotes the highest AP. A shorter best-to-worst
+      interval indicates more stable relative placement, whereas signed rank shifts in Table S6 identify the direction
+      and magnitude of movement between validation strategies.
+  - id: fig_s06_final_candidate_analysis
+    number: Figure S6
+    role: supplementary
+    order: 6
+    title: Final candidate analysis
+    stem: fig_s06_final_candidate_analysis
+    builder: final_candidate_analysis
+    panels:
+    - id: fig_s06a_final_candidate_rank_shift
+      letter: a
+      title: Final-candidate rank shift
+      stem: fig_s06a_final_candidate_rank_shift
+      selection:
+        model: random_forest; catboost
+        feature_set: full_multi; single_300; single_200; dual_200_300
+    - id: fig_s06b_positive_pixel_probability_distribution
+      letter: b
+      title: Positive-pixel probability distribution
+      stem: fig_s06b_positive_pixel_probability_distribution
+      selection:
+        site: BP_202507; HJ_202204
+        model: random_forest; catboost
+        feature_set: full_multi; single_300; single_200; dual_200_300
+    - id: fig_s06c_predicted_habitat_area_ratio
+      letter: c
+      title: Predicted habitat ratio of valid area
+      stem: fig_s06c_predicted_habitat_area_ratio
+      selection:
+        site: BP_202507; HJ_202204
+        model: random_forest; catboost
+        feature_set: full_multi; single_300; single_200; dual_200_300
+    paired_table_ids:
+    - table_s06_rank_stability_shift
+    - table_s07_final_candidate_map_statistics
+    paired_source_data_ids:
+    - rank_stability_all_entities
+    - probability_statistics
+    - binary_statistics
+    manuscript_role: Supplementary final-candidate robustness and map sensitivity
+    source_lineage: rank_stability_all_entities; Stage 12 final-map statistics
+    caption: Figure S6. Final-candidate robustness and map sensitivity. Panel (a) compares stored validation ranks
+      for the four retained candidates; rank 1 is best and the primary Balanced candidate is outlined for emphasis,
+      with exact rank and shift values in Table S6. Panel (b) shows site-specific means, histogram-approximated
+      medians, and interquartile ranges (p25-p75) of pixel-level habitat-class probability among positive prediction
+      pixels only (p >= 0.5); probability is not average precision (AP). Panel (c) reports predicted habitat extent
+      as a percentage of the full valid mapped area. Tables S6 and S7 provide the corresponding rank and map-statistic
+      values.
+  - id: fig_s07_feature_importance
+    number: Figure S7
+    role: supplementary
+    order: 7
+    title: Feature importance
+    stem: fig_s07_feature_importance
+    builder: supplementary_feature_importance
+    panels:
+    - id: fig_s07a_hujeong_feature_importance
+      letter: a
+      title: Hujeong feature importance
+      stem: fig_s07a_hujeong_feature_importance
+      selection:
+        site: HJ_202204
+    - id: fig_s07b_bongpyeong_feature_importance
+      letter: b
+      title: Bongpyeong feature importance
+      stem: fig_s07b_bongpyeong_feature_importance
+      selection:
+        site: BP_202507
+    - id: fig_s07c_combined_feature_importance
+      letter: c
+      title: Combined feature importance
+      stem: fig_s07c_combined_feature_importance
+    - id: fig_s07d_final_model_feature_importance_distribution
+      letter: d
+      title: Final-model feature-importance distribution
+      stem: fig_s07d_final_model_feature_importance_distribution
+      selection:
+        site: BP_202507; HJ_202204
+    paired_table_ids:
+    - table_s08_final_feature_importance
+    paired_source_data_ids:
+    - final_model_provenance
+    manuscript_role: Supplementary final-model feature importance
+    source_lineage: final-map feature_importance artifacts; final_model_provenance
+    caption: Figure S7. Final-model model-native feature importance for the retained Random Forest and CatBoost candidates. Each model's importances were
+      converted to within-model shares summing to one before cross-model summaries. Panels (a-c) show the 12 features
+      with the greatest combined mean share, displayed for Hujeong, Bongpyeong, and both sites combined in
+      a common order. Colors denote the same bathymetric, acoustic-intensity, texture, and frequency-difference
+      groups used in Figure 8. Panel (d) shows distributions for those selected features across final retrained
+      site by candidate models (seed 42); each observation is one final site-candidate model. Table S8 contains
+      all 60 raw feature-importance records, including features not in the displayed top-12 subset. Importance is not
+      permutation importance or validation performance.
+  - id: fig_s08_validation_performance_hujeong
+    number: Figure S8
+    role: supplementary
+    order: 8
+    title: 'Representative validation performance: Hujeong'
+    stem: fig_s08_validation_performance_hujeong
+    builder: representative_validation
+    panels:
+    - id: fig_s08a_within_site_hujeong_confusion_matrix
+      letter: a
+      title: Within-site Hujeong confusion matrix
+      stem: fig_s08a_within_site_hujeong_confusion_matrix
+      selection:
+        target_site: HJ_202204
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: within_site
+    - id: fig_s08b_spatial_cv_hujeong_5_fold_oof_confusion_matrix
+      letter: b
+      title: Spatial block CV Hujeong (5-fold OOF) confusion matrix
+      stem: fig_s08b_spatial_cv_hujeong_5_fold_oof_confusion_matrix
+      selection:
+        target_site: HJ_202204
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: spatial_block_cv
+    - id: fig_s08c_bongpyeong_hujeong_cross_site_confusion_matrix
+      letter: c
+      title: Bongpyeong → Hujeong cross-site confusion matrix
+      stem: fig_s08c_bongpyeong_hujeong_cross_site_confusion_matrix
+      selection:
+        target_site: HJ_202204
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: cross_site
+    - id: fig_s08d_within_site_hujeong_precision_recall_curve
+      letter: d
+      title: Within-site Hujeong precision-recall curve
+      stem: fig_s08d_within_site_hujeong_precision_recall_curve
+      selection:
+        target_site: HJ_202204
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: within_site
+    - id: fig_s08e_spatial_cv_hujeong_5_fold_oof_precision_recall_curve
+      letter: e
+      title: Spatial block CV Hujeong (5-fold OOF) precision-recall curve
+      stem: fig_s08e_spatial_cv_hujeong_5_fold_oof_precision_recall_curve
+      selection:
+        target_site: HJ_202204
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: spatial_block_cv
+    - id: fig_s08f_bongpyeong_hujeong_cross_site_precision_recall_curve
+      letter: f
+      title: Bongpyeong → Hujeong cross-site precision-recall curve
+      stem: fig_s08f_bongpyeong_hujeong_cross_site_precision_recall_curve
+      selection:
+        target_site: HJ_202204
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: cross_site
+    - id: fig_s08g_within_site_hujeong_roc_curve
+      letter: g
+      title: Within-site Hujeong ROC curve
+      stem: fig_s08g_within_site_hujeong_roc_curve
+      selection:
+        target_site: HJ_202204
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: within_site
+    - id: fig_s08h_spatial_cv_hujeong_5_fold_oof_roc_curve
+      letter: h
+      title: Spatial block CV Hujeong (5-fold OOF) ROC curve
+      stem: fig_s08h_spatial_cv_hujeong_5_fold_oof_roc_curve
+      selection:
+        target_site: HJ_202204
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: spatial_block_cv
+    - id: fig_s08i_bongpyeong_hujeong_cross_site_roc_curve
+      letter: i
+      title: Bongpyeong → Hujeong cross-site ROC curve
+      stem: fig_s08i_bongpyeong_hujeong_cross_site_roc_curve
+      selection:
+        target_site: HJ_202204
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: cross_site
+    paired_table_ids:
+    - table_s09_representative_validation_hujeong
+    paired_source_data_ids: []
+    manuscript_role: Supplementary representative validation for Hujeong
+    source_lineage: RF full_multi seed-42 stored predictions for Hujeong
+    caption: Figure S8. Representative validation performance for target site Hujeong using Random Forest, the Full
+      10-band feature set, and seed 42. Columns compare within-site held-out test predictions, five-fold spatial block
+      pooled out-of-fold (OOF) predictions, and complete-target cross-site predictions transferred from Bongpyeong;
+      rows show confusion matrices, precision-recall curves, and receiver operating characteristic (ROC) curves.
+      Confusion matrices use p >= 0.5, whereas average precision (AP) and ROC area under the curve (AUC) are threshold
+      independent. No confidence interval or multiple-run average is shown. Table S9 provides the numerical AP,
+      ROC AUC, and confusion counts.
+  - id: fig_s09_validation_performance_bongpyeong
+    number: Figure S9
+    role: supplementary
+    order: 9
+    title: 'Representative validation performance: Bongpyeong'
+    stem: fig_s09_validation_performance_bongpyeong
+    builder: representative_validation
+    panels:
+    - id: fig_s09a_within_site_bongpyeong_confusion_matrix
+      letter: a
+      title: Within-site Bongpyeong confusion matrix
+      stem: fig_s09a_within_site_bongpyeong_confusion_matrix
+      selection:
+        target_site: BP_202507
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: within_site
+    - id: fig_s09b_spatial_cv_bongpyeong_5_fold_oof_confusion_matrix
+      letter: b
+      title: Spatial block CV Bongpyeong (5-fold OOF) confusion matrix
+      stem: fig_s09b_spatial_cv_bongpyeong_5_fold_oof_confusion_matrix
+      selection:
+        target_site: BP_202507
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: spatial_block_cv
+    - id: fig_s09c_hujeong_bongpyeong_cross_site_confusion_matrix
+      letter: c
+      title: Hujeong → Bongpyeong cross-site confusion matrix
+      stem: fig_s09c_hujeong_bongpyeong_cross_site_confusion_matrix
+      selection:
+        target_site: BP_202507
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: cross_site
+    - id: fig_s09d_within_site_bongpyeong_precision_recall_curve
+      letter: d
+      title: Within-site Bongpyeong precision-recall curve
+      stem: fig_s09d_within_site_bongpyeong_precision_recall_curve
+      selection:
+        target_site: BP_202507
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: within_site
+    - id: fig_s09e_spatial_cv_bongpyeong_5_fold_oof_precision_recall_curve
+      letter: e
+      title: Spatial block CV Bongpyeong (5-fold OOF) precision-recall curve
+      stem: fig_s09e_spatial_cv_bongpyeong_5_fold_oof_precision_recall_curve
+      selection:
+        target_site: BP_202507
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: spatial_block_cv
+    - id: fig_s09f_hujeong_bongpyeong_cross_site_precision_recall_curve
+      letter: f
+      title: Hujeong → Bongpyeong cross-site precision-recall curve
+      stem: fig_s09f_hujeong_bongpyeong_cross_site_precision_recall_curve
+      selection:
+        target_site: BP_202507
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: cross_site
+    - id: fig_s09g_within_site_bongpyeong_roc_curve
+      letter: g
+      title: Within-site Bongpyeong ROC curve
+      stem: fig_s09g_within_site_bongpyeong_roc_curve
+      selection:
+        target_site: BP_202507
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: within_site
+    - id: fig_s09h_spatial_cv_bongpyeong_5_fold_oof_roc_curve
+      letter: h
+      title: Spatial block CV Bongpyeong (5-fold OOF) ROC curve
+      stem: fig_s09h_spatial_cv_bongpyeong_5_fold_oof_roc_curve
+      selection:
+        target_site: BP_202507
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: spatial_block_cv
+    - id: fig_s09i_hujeong_bongpyeong_cross_site_roc_curve
+      letter: i
+      title: Hujeong → Bongpyeong cross-site ROC curve
+      stem: fig_s09i_hujeong_bongpyeong_cross_site_roc_curve
+      selection:
+        target_site: BP_202507
+        model: random_forest
+        feature_set: full_multi
+        seed: '42'
+        validation_strategy: cross_site
+    paired_table_ids:
+    - table_s10_representative_validation_bongpyeong
+    paired_source_data_ids: []
+    manuscript_role: Supplementary representative validation for Bongpyeong
+    source_lineage: RF full_multi seed-42 stored predictions for Bongpyeong
+    caption: Figure S9. Representative validation performance for target site Bongpyeong using Random Forest, the
+      Full 10-band feature set, and seed 42. Columns compare within-site held-out test predictions, five-fold spatial block
+      pooled out-of-fold (OOF) predictions, and complete-target cross-site predictions transferred from Hujeong;
+      rows show confusion matrices, precision-recall curves, and receiver operating characteristic (ROC) curves.
+      Confusion matrices use p >= 0.5, whereas average precision (AP) and ROC area under the curve (AUC) are threshold
+      independent. No confidence interval or multiple-run average is shown. Table S10 provides the numerical AP,
+      ROC AUC, and confusion counts.
+  tables:
+  - id: table_01_study_sites_dataset_summary
+    number: Table 1
+    role: main
+    order: 1
+    title: Study sites and dataset summary
+    stem: table_01_study_sites_dataset_summary
+    builder: publication_site_summary
+    paired_figure_ids:
+    - fig_01_study_areas
+    - fig_02_workflow_validation_framework
+    caption: 'Table 1. Study sites and dataset summary.
+
+
+      Survey context for the Bongpyeong and Hujeong study sites. Each row represents one survey site. Depth values
+      are signed elevations in metres relative to the source vertical datum, so negative values indicate positions
+      below that datum. Frequencies are in kilohertz (kHz), and target resolution is the common 0.07 m analysis-grid
+      cell size rather than survey positional accuracy.'
+  - id: table_02_key_validation_performance
+    number: Table 2
+    role: main
+    order: 2
+    title: Top-performing model-feature combinations by validation scope
+    stem: table_02_key_validation_performance
+    builder: key_validation_performance
+    paired_figure_ids:
+    - fig_04_feature_set_comparison
+    - fig_05_model_comparison
+    - fig_06_feature_model_heatmap
+    caption: 'Table 2. Top-performing model-feature combinations by validation scope.
+
+
+      Top-performing model-feature combinations within each validation scope. Each scope contains its five highest
+      stored mean average-precision (AP) results without forced inclusion of a reference combination. Random Forest
+      with the Full 10-band feature set is therefore absent when it ranks below the top five. Scope rank is recalculated
+      within one site or transfer direction; rank 1 is best. Receiver operating characteristic area under the curve
+      (ROC AUC) and AP are threshold independent. Within-site and cross-site values are means across five seeds;
+      spatial block cross-validation (CV) values are means across 25 fold-runs (five seeds by five folds), not pooled
+      out-of-fold estimates. Final integrated selection is reported separately in Table 3.'
+  - id: table_03_final_candidate_selection
+    number: Table 3
+    role: main
+    order: 3
+    title: Final candidate comparison and selection
+    stem: table_03_final_candidate_selection
+    builder: final_candidate_selection_summary
+    paired_figure_ids:
+    - fig_07_final_candidate_comparison
+    caption: 'Table 3. Final candidate comparison and selection.
+
+
+      Comparison of the four final candidates in the same order used in Figure 7. Average precision
+      (AP) is summarized separately for within-site, cross-site, and spatial block cross-validation (CV). Integrated
+      AP is the equal-weight arithmetic mean of those three AP values; it is neither sample weighted nor a pooled
+      AP. Minimum AP and AP range summarize robustness across validation strategies and should not be interpreted
+      as confidence intervals.'
+  - id: table_04_primary_habitat_prediction_summary
+    number: Table 4
+    role: main
+    order: 4
+    title: Final habitat prediction summary
+    stem: table_04_primary_habitat_prediction_summary
+    builder: primary_habitat_summary
+    paired_figure_ids:
+    - fig_09_predicted_habitat_maps
+    caption: 'Table 4. Final habitat prediction summary.
+
+
+      Mapped habitat extent for the primary balanced Full 10-band Random Forest candidate. Each row represents one site. Valid
+      mapped area includes only finite prediction pixels accepted by the final feature mask; NoData and invalid
+      feature cells are excluded. Predicted habitat uses the fixed pixel probability threshold p >= 0.5. Habitat
+      ratio equals predicted habitat extent divided by valid mapped area. Areas derive from the 0.07 m raster grid
+      and are reported in hectares (ha).'
+  - id: table_s01_feature_set_composition
+    number: Table S1
+    role: supplementary
+    order: 1
+    title: Feature-set definitions and composition
+    stem: table_s01_feature_set_composition
+    builder: feature_set_definitions
+    paired_figure_ids:
+    - fig_03_mbes_feature_definitions
+    caption: 'Table S1. Feature-set definitions and composition.
+
+
+      Definitions and composition of the seven feature sets used throughout model training and validation. Each
+      row is one feature set; frequencies and reference frequency are in kHz. Feature counts separate acoustic intensity,
+      normalized difference index (NDI), bathymetric terrain, and texture predictors.'
+  - id: table_s02_model_configuration
+    number: Table S2
+    role: supplementary
+    order: 2
+    title: Model configuration and hyperparameters
+    stem: table_s02_model_configuration
+    builder: model_config_summary
+    paired_figure_ids:
+    - fig_02_workflow_validation_framework
+    caption: 'Table S2. Model configuration and hyperparameters.
+
+
+      YAML-defined classifier configurations for Random Forest, LightGBM, CatBoost, and XGBoost. Each row is one
+      model. Key configuration provides a concise reader-facing summary. Complete model parameters are provided
+      in the JSON configuration column, including the model-specific runtime seed key.'
+  - id: table_s03_full_within_site_results
+    number: Table S3
+    role: supplementary
+    order: 3
+    title: Full within-site validation results
+    stem: table_s03_full_within_site_results
+    builder: validation_publication_summary
+    parameters:
+      validation_source: within_site
+    paired_figure_ids:
+    - fig_s01_within_site_validation
+    caption: 'Table S3. Full within-site validation results.
+
+
+      Within-site performance for every site, model, and feature set. Each row is a mean across five seed-specific
+      held-out test subsets. Average precision (AP) and receiver operating characteristic area under the curve (ROC
+      AUC) are threshold independent. Precision, recall, and F1 use the stored precision-target threshold policy
+      (target 0.90); all 280 runs met that target. Variability and full threshold provenance remain in the unnumbered
+      validation source data.'
+  - id: table_s04_full_cross_site_results
+    number: Table S4
+    role: supplementary
+    order: 4
+    title: Full cross-site transfer results
+    stem: table_s04_full_cross_site_results
+    builder: validation_publication_summary
+    parameters:
+      validation_source: cross_site
+    paired_figure_ids:
+    - fig_s02_cross_site_validation
+    caption: 'Table S4. Full cross-site transfer results.
+
+
+      Directional cross-site transfer performance for every model and feature set. Each row is a mean across five
+      seeds evaluated on the complete target-site dataset; transfer directions are not pooled. AP and ROC AUC are
+      threshold independent. Precision, recall, and F1 combine stored precision-target thresholds with fixed 0.5
+      fallbacks: 89 of 280 runs met the 0.90 target and 191 used fallback. The detailed threshold outcomes remain
+      in the unnumbered validation source data.'
+  - id: table_s05_full_spatial_cv_results
+    number: Table S5
+    role: supplementary
+    order: 5
+    title: Full spatial block CV results
+    stem: table_s05_full_spatial_cv_results
+    builder: validation_publication_summary
+    parameters:
+      validation_source: spatial_block_cv
+    paired_figure_ids:
+    - fig_s03_spatial_block_cv_validation
+    caption: 'Table S5. Full spatial block CV results.
+
+
+      Spatial-block cross-validation (CV) performance for every site, model, and feature set. Each row is the mean
+      across 25 fold-runs (five seeds by five folds); these are not 25 independent experiments and are not pooled
+      out-of-fold (OOF) predictions. AP and ROC AUC are threshold independent. Of 1,400 fold-runs, 874 met the 0.90
+      precision target and 526 used threshold 0.5; threshold-dependent precision, recall, and F1 should therefore
+      be interpreted with the detailed threshold provenance provided in the unnumbered validation source data.'
+  - id: table_s06_rank_stability_shift
+    number: Table S6
+    role: supplementary
+    order: 6
+    title: Rank stability and rank shift
+    stem: table_s06_rank_stability_shift
+    builder: rank_stability_shift_summary
+    paired_figure_ids:
+    - fig_s05_ranking_stability
+    - fig_s06_final_candidate_analysis
+    caption: 'Table S6. Rank stability and rank shift.
+
+
+      Rank stability of model, feature-set, and model-feature entities across validation strategies. Rank 1 is best.
+      Integrated AP is the equal-weight mean of within-site, cross-site, and spatial block CV AP, not a pooled or sample-weighted
+      metric. Rank shifts are defined as later minus earlier rank: positive values indicate deterioration, negative
+      values improvement, and zero no change. Shifts are available only for model-feature entities; other entries
+      are NA. rank_stability_order is the stored ordering from Stage 11 based on increasing mean rank, then rank
+      range and Integrated AP.'
+  - id: table_s07_final_candidate_map_statistics
+    number: Table S7
+    role: supplementary
+    order: 7
+    title: Final candidate map statistics
+    stem: table_s07_final_candidate_map_statistics
+    builder: final_candidate_map_statistics
+    paired_figure_ids:
+    - fig_s06_final_candidate_analysis
+    caption: 'Table S7. Final candidate map statistics.
+
+
+      Site-level map statistics for all four final candidates (two sites by four candidates). Probability
+      statistics were calculated only from pixels classified as habitat (p >= 0.5), whereas habitat ratio was calculated
+      relative to the full valid mapped area. Positive-probability quartiles are deterministic approximations from
+      a 10,000-bin histogram. NoData and invalid feature cells are excluded from valid mapped area. positive_area_ratio
+      is a 0-1 proportion equal to predicted_habitat_area_ha divided by valid_mapped_area_ha, not a percentage.
+      Pixel probability is distinct from dataset-level average precision (AP).'
+  - id: table_s08_final_feature_importance
+    number: Table S8
+    role: supplementary
+    order: 8
+    title: Final-model feature importance
+    stem: table_s08_final_feature_importance
+    builder: portable_feature_importance
+    paired_figure_ids:
+    - fig_08_feature_importance
+    - fig_s07_feature_importance
+    caption: 'Table S8. Final-model feature importance.
+
+
+      Feature importance for all eight final models (two sites by four candidates), comprising Random Forest and
+      CatBoost estimators. Each row is one feature within one final model. Importance uses the model-family-native
+      measure and rank is within that model; values are neither permutation importance nor validation performance,
+      and scales from different model families are not assumed to be directly calibrated. Feature labels and groups
+      match Main Figure 8 and Figure S7.'
+  - id: table_s09_representative_validation_hujeong
+    number: Table S9
+    role: supplementary
+    order: 9
+    title: 'Representative validation performance: Hujeong'
+    stem: table_s09_representative_validation_hujeong
+    builder: representative_validation_table
+    parameters:
+      representative_run: hujeong_validation
+    paired_figure_ids:
+    - fig_s08_validation_performance_hujeong
+    caption: 'Table S9. Representative validation performance: Hujeong.
+
+
+      Representative Hujeong validation for RF, Full 10-band, seed 42. Within-site uses the held-out test subset,
+      spatial block CV pools five OOF folds, and cross-site uses Bongpyeong-to-Hujeong complete target-site predictions.
+      sample_count is the number of prediction records; positive and negative counts are actual habitat and non-habitat
+      labels. AP and ROC AUC use stored probabilities; true negative (TN), false positive (FP), false negative (FN),
+      and true positive (TP) counts use p >= 0.5. No run averaging or confidence interval is applied.'
+  - id: table_s10_representative_validation_bongpyeong
+    number: Table S10
+    role: supplementary
+    order: 10
+    title: 'Representative validation performance: Bongpyeong'
+    stem: table_s10_representative_validation_bongpyeong
+    builder: representative_validation_table
+    parameters:
+      representative_run: bongpyeong_validation
+    paired_figure_ids:
+    - fig_s09_validation_performance_bongpyeong
+    caption: 'Table S10. Representative validation performance: Bongpyeong.
+
+
+      Representative Bongpyeong validation for RF, Full 10-band, seed 42. Within-site uses the held-out test subset,
+      spatial block CV pools five OOF folds, and cross-site uses Hujeong-to-Bongpyeong complete target-site predictions.
+      sample_count is the number of prediction records; positive and negative counts are actual habitat and non-habitat
+      labels. AP and ROC AUC use stored probabilities; true negative (TN), false positive (FP), false negative (FN),
+      and true positive (TP) counts use p >= 0.5. No run averaging or confidence interval is applied.'
+  source_data:
+  - id: cross_site_detailed_summary
+    stem: cross_site_detailed_summary
+    category: validation
+    order: 1
+    builder: validation_source
+    paired_figure_ids:
+    - fig_s02_cross_site_validation
+  - id: cross_site_seed_metrics
+    stem: cross_site_seed_metrics
+    category: validation
+    order: 2
+    builder: validation_source
+    paired_figure_ids: []
+  - id: integrated_feature_model_matrix
+    stem: integrated_feature_model_matrix
+    category: validation
+    order: 3
+    builder: validation_source
+    paired_figure_ids:
+    - fig_06_feature_model_heatmap
+    - fig_07_final_candidate_comparison
+    - fig_s04_integrated_comparison
+  - id: integrated_model_feature_marginals
+    stem: integrated_model_feature_marginals
+    category: validation
+    order: 4
+    builder: validation_source
+    paired_figure_ids:
+    - fig_04_feature_set_comparison
+    - fig_05_model_comparison
+    - fig_s04_integrated_comparison
+  - id: rank_stability_all_entities
+    stem: rank_stability_all_entities
+    category: validation
+    order: 5
+    builder: validation_source
+    paired_figure_ids:
+    - fig_s05_ranking_stability
+    - fig_s06_final_candidate_analysis
+  - id: spatial_block_cv_detailed_summary
+    stem: spatial_block_cv_detailed_summary
+    category: validation
+    order: 6
+    builder: validation_source
+    paired_figure_ids:
+    - fig_s03_spatial_block_cv_validation
+  - id: spatial_block_cv_fold_metrics
+    stem: spatial_block_cv_fold_metrics
+    category: validation
+    order: 7
+    builder: validation_source
+    paired_figure_ids: []
+  - id: within_site_detailed_summary
+    stem: within_site_detailed_summary
+    category: validation
+    order: 8
+    builder: validation_source
+    paired_figure_ids:
+    - fig_s01_within_site_validation
+  - id: within_site_seed_metrics
+    stem: within_site_seed_metrics
+    category: validation
+    order: 9
+    builder: validation_source
+    paired_figure_ids: []
+  - id: cross_by_direction_feature
+    stem: cross_by_direction_feature
+    category: figure
+    order: 10
+    builder: figure_source
+    paired_figure_ids: []
+  - id: cross_by_direction_feature_model
+    stem: cross_by_direction_feature_model
+    category: figure
+    order: 11
+    builder: figure_source
+    paired_figure_ids:
+    - fig_s02_cross_site_validation
+  - id: cross_by_direction_model
+    stem: cross_by_direction_model
+    category: figure
+    order: 12
+    builder: figure_source
+    paired_figure_ids: []
+  - id: cross_overall_feature
+    stem: cross_overall_feature
+    category: figure
+    order: 13
+    builder: figure_source
+    paired_figure_ids: []
+  - id: cross_overall_feature_model
+    stem: cross_overall_feature_model
+    category: figure
+    order: 14
+    builder: figure_source
+    paired_figure_ids: []
+  - id: cross_overall_model
+    stem: cross_overall_model
+    category: figure
+    order: 15
+    builder: figure_source
+    paired_figure_ids: []
+  - id: feature_rank_stability
+    stem: feature_rank_stability
+    category: figure
+    order: 16
+    builder: figure_source
+    paired_figure_ids:
+    - fig_s05_ranking_stability
+  - id: model_rank_stability
+    stem: model_rank_stability
+    category: figure
+    order: 17
+    builder: figure_source
+    paired_figure_ids: []
+  - id: site_rank_correlation
+    stem: site_rank_correlation
+    category: figure
+    order: 18
+    builder: figure_source
+    paired_figure_ids: []
+  - id: spatial_by_site_feature
+    stem: spatial_by_site_feature
+    category: figure
+    order: 19
+    builder: figure_source
+    paired_figure_ids: []
+  - id: spatial_by_site_feature_model
+    stem: spatial_by_site_feature_model
+    category: figure
+    order: 20
+    builder: figure_source
+    paired_figure_ids:
+    - fig_s03_spatial_block_cv_validation
+  - id: spatial_by_site_model
+    stem: spatial_by_site_model
+    category: figure
+    order: 21
+    builder: figure_source
+    paired_figure_ids: []
+  - id: spatial_overall_feature
+    stem: spatial_overall_feature
+    category: figure
+    order: 22
+    builder: figure_source
+    paired_figure_ids: []
+  - id: spatial_overall_feature_model
+    stem: spatial_overall_feature_model
+    category: figure
+    order: 23
+    builder: figure_source
+    paired_figure_ids: []
+  - id: spatial_overall_model
+    stem: spatial_overall_model
+    category: figure
+    order: 24
+    builder: figure_source
+    paired_figure_ids: []
+  - id: within_by_site_feature
+    stem: within_by_site_feature
+    category: figure
+    order: 25
+    builder: figure_source
+    paired_figure_ids: []
+  - id: within_by_site_feature_model
+    stem: within_by_site_feature_model
+    category: figure
+    order: 26
+    builder: figure_source
+    paired_figure_ids:
+    - fig_s01_within_site_validation
+  - id: within_by_site_model
+    stem: within_by_site_model
+    category: figure
+    order: 27
+    builder: figure_source
+    paired_figure_ids: []
+  - id: within_overall_feature
+    stem: within_overall_feature
+    category: figure
+    order: 28
+    builder: figure_source
+    paired_figure_ids: []
+  - id: within_overall_feature_model
+    stem: within_overall_feature_model
+    category: figure
+    order: 29
+    builder: figure_source
+    paired_figure_ids: []
+  - id: within_overall_model
+    stem: within_overall_model
+    category: figure
+    order: 30
+    builder: figure_source
+    paired_figure_ids: []
+  - id: binary_statistics
+    stem: binary_statistics
+    category: map
+    order: 31
+    builder: map_source
+    paired_figure_ids:
+    - fig_09_predicted_habitat_maps
+    - fig_s06_final_candidate_analysis
+  - id: final_map_inventory
+    stem: final_map_inventory
+    category: map
+    order: 32
+    builder: map_source
+    paired_figure_ids:
+    - fig_01_study_areas
+    - fig_09_predicted_habitat_maps
+  - id: probability_statistics
+    stem: probability_statistics
+    category: map
+    order: 33
+    builder: map_source
+    paired_figure_ids:
+    - fig_09_predicted_habitat_maps
+    - fig_s06_final_candidate_analysis
+  - id: final_model_provenance
+    stem: final_model_provenance
+    category: inventory
+    order: 34
+    builder: inventory_source
+    paired_figure_ids:
+    - fig_02_workflow_validation_framework
+    - fig_08_feature_importance
+    - fig_s07_feature_importance
+  - id: sampling_summary
+    stem: sampling_summary
+    category: inventory
+    order: 35
+    builder: inventory_source
+    paired_figure_ids: []
+  contract:
+    main_figures: 9
+    supplementary_figures: 9
+    main_panels: 35
+    supplementary_panels: 42
+    main_tables: 4
+    supplementary_tables: 10
+    source_data: 35

@@ -1,0 +1,18 @@
+model:
+  id: catboost
+  display_name: CatBoost
+  type: catboost_classifier
+  task: binary_classification
+
+params:
+  iterations: 700
+  learning_rate: 0.05
+  depth: 6
+  l2_leaf_reg: 3.0
+  loss_function: Logloss
+  eval_metric: AUC
+  verbose: false
+  allow_writing_files: false
+
+ensemble:
+  use_seeds: true

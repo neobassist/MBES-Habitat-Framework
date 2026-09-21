@@ -1,0 +1,22 @@
+feature_set:
+  id: single_200
+  type: single_frequency
+  frequencies:
+    - 200
+  reference_frequency: 200
+  feature_count: 6
+
+features:
+  acoustic:
+    - a200_norm
+
+  frequency_difference: []
+
+  terrain:
+    - dpth_lite_200
+    - dpth_rel_200
+
+  texture:
+    - a200_low
+    - a200_high
+    - a200_log1p

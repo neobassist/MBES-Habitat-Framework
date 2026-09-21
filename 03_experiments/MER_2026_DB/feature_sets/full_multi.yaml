@@ -1,0 +1,30 @@
+feature_set:
+  id: full_multi
+  type: multi_frequency
+
+  frequencies:
+    - 200
+    - 300
+    - 400
+
+  reference_frequency: 300
+  feature_count: 10
+
+features:
+  acoustic:
+    - a200_norm
+    - a300_norm
+    - a400_norm
+
+  frequency_difference:
+    - NDI_4_2_norm
+    - NDI_4_3_norm
+
+  terrain:
+    - dpth_lite_300
+    - dpth_rel_300
+
+  texture:
+    - a300_low
+    - a300_high
+    - a300_log1p

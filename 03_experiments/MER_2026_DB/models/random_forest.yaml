@@ -1,0 +1,16 @@
+model:
+  id: random_forest
+  display_name: Random Forest
+  type: sklearn_random_forest
+  task: binary_classification
+
+params:
+  n_estimators: 500
+  max_depth: null
+  min_samples_leaf: 2
+  max_features: sqrt
+  class_weight: balanced
+  n_jobs: -1
+
+ensemble:
+  use_seeds: true

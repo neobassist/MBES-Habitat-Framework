@@ -1,0 +1,68 @@
+schema_version: 1
+project_id: MER_2026_DB
+
+analysis:
+  metric: AP_mean
+  integration:
+    method: equal_weight_mean
+  validation_sources:
+    - id: within_site
+      weight: 1
+    - id: cross_site
+      weight: 1
+    - id: spatial_block_cv
+      weight: 1
+  require_complete_sources: true
+
+  site_rank_comparisons:
+    - id: BP_vs_HJ
+      sites:
+        - BP_202507
+        - HJ_202204
+      validation_sources:
+        - within_site
+        - spatial_block_cv
+
+  candidate_selection:
+    mode: explicit
+    candidates:
+      - id: primary_balanced
+        feature_set: full_multi
+        model: random_forest
+        order: 1
+        role: primary
+      - id: cross_site_best
+        feature_set: single_300
+        model: random_forest
+        order: 2
+        role: cross_site_sensitivity
+      - id: spatial_best
+        feature_set: single_200
+        model: catboost
+        order: 3
+        role: spatial_robustness
+      - id: dual_transfer_candidate
+        feature_set: dual_200_300
+        model: random_forest
+        order: 4
+        role: dual_frequency_transfer
+
+  focused_model_comparisons:
+    - output_stem: A_full_multi_model_comparison
+      feature_set: full_multi
+      models:
+        - random_forest
+        - lightgbm
+        - catboost
+        - xgboost
+    - output_stem: B_single_200_model_comparison
+      feature_set: single_200
+      models:
+        - random_forest
+        - lightgbm
+        - catboost
+        - xgboost
+
+  final_mapping:
+    sites: all_configured
+    seed: 42

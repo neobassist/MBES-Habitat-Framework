@@ -1,0 +1,27 @@
+feature_set:
+  id: dual_200_300
+  type: dual_frequency
+
+  frequencies:
+    - 200
+    - 300
+
+  reference_frequency: 300
+  feature_count: 8
+
+features:
+  acoustic:
+    - a200_norm
+    - a300_norm
+
+  frequency_difference:
+    - NDI_3_2_norm
+
+  terrain:
+    - dpth_lite_300
+    - dpth_rel_300
+
+  texture:
+    - a300_low
+    - a300_high
+    - a300_log1p

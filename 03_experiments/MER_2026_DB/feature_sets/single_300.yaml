@@ -1,0 +1,22 @@
+feature_set:
+  id: single_300
+  type: single_frequency
+  frequencies:
+    - 300
+  reference_frequency: 300
+  feature_count: 6
+
+features:
+  acoustic:
+    - a300_norm
+
+  frequency_difference: []
+
+  terrain:
+    - dpth_lite_300
+    - dpth_rel_300
+
+  texture:
+    - a300_low
+    - a300_high
+    - a300_log1p

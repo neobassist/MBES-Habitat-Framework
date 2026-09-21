@@ -1,0 +1,64 @@
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python caches, coverage, builds, and local environments
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+
+# Local environment and notebook state
+.env
+.env.*
+.ipynb_checkpoints/
+
+# Logs and temporary work
+*.log
+tmp/
+temp/
+
+# Researcher-owned inputs and reproducible outputs
+01_data/*
+!01_data/README.md
+05_outputs/
+06_docs/
+**/.mbes/executions/*/runs/
+
+# Geospatial rasters, vectors, and exports
+*.tif
+*.tiff
+*.asc
+*.xyz
+*.vrt
+*.ovr
+*.aux.xml
+*.shp
+*.dbf
+*.shx
+*.prj
+*.qmd
+*.qix
+*.cpg
+
+# Persisted model artifacts
+*.joblib
+*.pkl
+*.pickle
+*.cbm
