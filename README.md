@@ -116,25 +116,17 @@ Users should follow the pipeline stage order and the configuration files supplie
 
 ## Scientific provenance
 
-The frozen scientific run supporting the publication is:
-
-```text
-run_20260916_035737_2df29152
-```
-
-The associated source Git commit is:
-
-```text
-cc4fc5f6b1c66bdd60633589c235230acfec6165
-```
-
-The scientific run was completed on **16 September 2026**.
+| Item | Value |
+|---|---|
+| Frozen scientific run | `run_20260916_035737_2df29152` |
+| Source Git commit | `cc4fc5f6b1c66bdd60633589c235230acfec6165` |
+| Run completed | 16 September 2026 |
 
 Subsequent framework changes were limited to non-scientific maintenance associated with publication preparation, including common-valid exports, map previews, north arrows and scale bars, publication terminology, output organization, and output-contract checks.
 
 These subsequent changes did **not** alter the validation predictions, final probability rasters, or candidate average-precision values underlying the reported scientific results.
 
-See `RELEASE_NOTES.md` for details.
+See [`RELEASE_NOTES.md`](RELEASE_NOTES.md) for details.
 
 ## Reproducibility scope
 
@@ -142,11 +134,9 @@ This repository provides a **publication-specific reproducibility snapshot** of 
 
 It includes the software logic, experiment definitions, project configuration, tests, and environment documentation needed to inspect the reported analytical workflow and to execute it when appropriate authorized inputs are supplied.
 
-Raw MBES survey data are not included.
+Raw MBES survey data are not included. Accordingly, this repository should not be interpreted as a fully self-contained archive enabling unrestricted raw-data-to-publication reproduction.
 
-Accordingly, this repository should not be interpreted as a fully self-contained archive enabling unrestricted raw-data-to-publication reproduction.
-
-A companion **KIOST institutional data deposit** containing derived publication source data is being prepared for public release.
+A companion **Mendeley Data deposit** containing the derived publication source data associated with this study has been submitted under the reserved DOI [10.17632/7dz3gn5zmg.1](https://doi.org/10.17632/7dz3gn5zmg.1). The publication and access status of the dataset is governed by the corresponding Mendeley Data record.
 
 ## Mapping threshold
 
@@ -176,15 +166,11 @@ Raw MBES data are retained as part of ongoing institutional research activities 
 
 Access to underlying survey data may be considered on reasonable request, subject to applicable institutional, project, and data-management constraints.
 
-## Companion KIOST data deposit
+## Companion Mendeley Data deposit
 
-A companion KIOST institutional repository deposit containing compact derived publication data is being prepared for public release.
+A companion Mendeley Data deposit contains compact derived publication data supporting the reported results.
 
-KIOST repository URL or persistent identifier:
-
-```text
-[TO BE ASSIGNED]
-```
+**Reserved DOI:** [10.17632/7dz3gn5zmg.1](https://doi.org/10.17632/7dz3gn5zmg.1)
 
 The compact data package includes derived source data supporting the reported publication results, including:
 
@@ -201,15 +187,16 @@ The compact data package includes derived source data supporting the reported pu
 
 The Figure 1 locator is not included in the source-data deposit because it was manually prepared using external basemap imagery.
 
-Large optional raster products are not part of the initial compact public deposit. These include the full-resolution probability rasters, prediction masks, and common-valid GeoTIFF products.
+Large optional raster products are not part of the compact data deposit. These include the full-resolution probability rasters, prediction masks, and common-valid GeoTIFF products.
+
+The derived publication data and metadata in the Mendeley Data deposit are released under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) license.
 
 ## Relationship between the code and data releases
 
-The GitHub repository and KIOST institutional deposit serve complementary purposes.
+The GitHub repository and Mendeley Data deposit serve complementary purposes:
 
-The **GitHub repository** provides the publication-specific code, configurations, tests, and workflow documentation.
-
-The **KIOST deposit** provides derived publication source data used to verify the reported figures, tables, validation summaries, candidate-selection results, and mapping summaries.
+- The **GitHub repository** provides the publication-specific code, configurations, tests, and workflow documentation.
+- The **Mendeley Data deposit** provides derived publication source data used to verify the reported figures, tables, validation summaries, candidate-selection results, and mapping summaries.
 
 Together, these resources are intended to improve transparency and reproducibility without redistributing raw institutional MBES survey data or restricted third-party assets.
 
@@ -217,58 +204,42 @@ Together, these resources are intended to improve transparency and reproducibili
 
 Environment information is provided in:
 
-```text
-REQUIREMENTS.md
-environment.yml
-requirements.txt
-```
+- [`REQUIREMENTS.md`](REQUIREMENTS.md)
+- [`environment.yml`](environment.yml)
+- [`requirements.txt`](requirements.txt)
 
 The compatibility environment documented for this release was captured using **Python 3.11.14** on **macOS arm64**.
 
 This environment information is provided as a practical compatibility reference and should not be interpreted as an exact reconstruction of every historical software build used during development.
 
-A Conda-based environment is recommended because the workflow depends on multiple geospatial Python libraries and their system-level dependencies.
-
-See `REQUIREMENTS.md` for additional details.
+A Conda-based environment is recommended because the workflow depends on multiple geospatial Python libraries and their system-level dependencies. See [`REQUIREMENTS.md`](REQUIREMENTS.md) for additional details.
 
 ## Citation
 
-The final GitHub repository URL and release identifier will be added before or at public release.
+| Resource | Identifier |
+|---|---|
+| GitHub repository | <https://github.com/neobassist/MBES-Habitat-Framework> |
+| GitHub release/tag | `[TO BE ASSIGNED]` |
+| Companion Mendeley Data DOI | [10.17632/7dz3gn5zmg.1](https://doi.org/10.17632/7dz3gn5zmg.1) |
 
-GitHub repository:
+Please also consult [`CITATION.cff`](CITATION.cff) for machine-readable citation metadata.
 
-```text
-[TO BE ASSIGNED]
-```
-
-GitHub release/tag:
-
-```text
-[TO BE ASSIGNED]
-```
-
-Please also consult `CITATION.cff` for machine-readable citation metadata.
-
-When using this repository, please cite the associated publication and the archived software release once the final bibliographic and repository identifiers are available.
+When using these resources, please cite the associated manuscript and the relevant software and data records as appropriate.
 
 ## License and reuse
 
-The authoritative framework source did not contain an explicit public software license when this publication package was assembled.
+The authoritative framework source did not contain an explicit public software license when this publication package was assembled. No software license has therefore been assigned implicitly or retroactively to the code in this repository.
 
-No license has therefore been assigned implicitly or retroactively.
+See [`LICENSE_STATUS.md`](LICENSE_STATUS.md) for the current software-rights status. A software license may be added following confirmation by the relevant authors and rights holder(s).
 
-See:
+> **Note:** The CC BY 4.0 license associated with the companion Mendeley Data deposit applies to the deposited derived data and metadata, **not** to the software in this GitHub repository.
 
-```text
-LICENSE_STATUS.md
-```
-
-for the current status.
-
-A software license may be added following confirmation by the relevant authors, rights holder(s), and/or KIOST.
-
-Until explicit reuse terms are assigned, public availability of the repository should not be interpreted as granting unrestricted reuse beyond applicable law and the terms explicitly stated in the repository.
+Until explicit software reuse terms are assigned, public availability of this repository should not be interpreted as granting unrestricted software reuse beyond applicable law and the terms explicitly stated in the repository.
 
 ## Contact
 
-For questions concerning the publication-specific analysis, code release, or companion derived-data deposit, please contact the corresponding authors identified in the associated manuscript.
+For questions concerning this publication-specific code snapshot or its relationship to the companion data deposit, please contact:
+
+**SoonYoung Choi**<br>
+Korea Institute of Ocean Science and Technology (KIOST)<br>
+sychoi@kiost.ac.kr
