@@ -17,8 +17,8 @@ abstract: >-
 
 repository-code: "https://github.com/neobassist/MBES-Habitat-Framework"
 
-# version: [TO BE ASSIGNED]
-# date-released: [TO BE ASSIGNED]
+version: "1.0.0"
+date-released: "2026-09-22"
 
 preferred-citation:
   type: article
@@ -43,4 +43,3 @@ preferred-citation:
     - family-names: Lee
       given-names: ChangWook
   journal: Marine Environmental Research
-# doi: [TO BE ASSIGNED]

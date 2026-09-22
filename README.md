@@ -219,7 +219,7 @@ A Conda-based environment is recommended because the workflow depends on multipl
 | Resource | Identifier |
 |---|---|
 | GitHub repository | <https://github.com/neobassist/MBES-Habitat-Framework> |
-| GitHub release/tag | `[TO BE ASSIGNED]` |
+| GitHub release/tag | v1.0.0 |
 | Companion Mendeley Data DOI | [10.17632/7dz3gn5zmg.1](https://doi.org/10.17632/7dz3gn5zmg.1) |
 
 Please also consult [`CITATION.cff`](CITATION.cff) for machine-readable citation metadata.

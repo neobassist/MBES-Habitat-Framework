@@ -1,6 +1,6 @@
 # Release notes
 
-Release version and tag: `[TO BE ASSIGNED]`
+Release version and tag: `v1.0.0`
 
 This package is a publication-specific snapshot for the manuscript `Machine-learning prediction of marine vegetated habitats using multibeam echosounder-derived environmental features`. The completed scientific run `run_20260916_035737_2df29152` records source Git commit `cc4fc5f6b1c66bdd60633589c235230acfec6165` and completed successfully on 16 September 2026.
 
